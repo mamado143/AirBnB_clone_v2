@@ -1,29 +1,27 @@
 #!/usr/bin/python3
-""" Routes to / """
+"""Flask framework"""
 from flask import Flask
 
-APP = Flask(__name__)
+app = Flask(__name__)
 
 
-@APP.route("/", strict_slashes=False)
-def hello():
-    """A route to /"""
+@app.route("/", strict_slashes=False)
+def hello_world():
+    """return hello HBNB"""
     return "Hello HBNB!"
 
 
-@APP.route("/hbnb", strict_slashes=False)
+@app.route("/hbnb", strict_slashes=False)
 def hbnb():
-    """A route to /hbnb"""
+    """return HBNB"""
     return "HBNB"
 
 
-@APP.route("/c/<text>", strict_slashes=False)
-def c(text):
-    """Route to /c"""
-    if "_" in text:
-        text = text.replace("_", " ")
-    return "C {text}".format(text=text)
+@app.route('/c/<text>', strict_slashes=False)
+def text(text):
+    """return text given"""
+    return "C {}".format(text.replace("_", " "))
 
 
-if __name__ == "__main__":
-    APP.run(host="0.0.0.0", port=5000)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)

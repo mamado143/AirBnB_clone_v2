@@ -1,25 +1,29 @@
 #!/usr/bin/python3
-""" A route to /states_list """
-from flask import Flask, render_template
+"""Starts a flask app
+    listens to 0.0.0.0:5000
+
+"""
 from models import storage
-from models.state import State
+from flask import Flask
+from flask import render_template
 
 app = Flask(__name__)
-app.url_map.strict_slashes = False
+
+
+@app.route("/states_list", strict_slashes=False)
+def states_list():
+    """Displays an HTML page with a list of all State objects in DBStorage.
+    States are sorted by name.
+    """
+    states = storage.all("State")
+    return render_template("7-states_list.html", states=states)
 
 
 @app.teardown_appcontext
-def close_db(exception):
-    """ Tear down the database again """
+def teardown(exc):
+    """Remove the current SQLAlchemy session."""
     storage.close()
 
 
-@app.route("/states_list")
-def states_list():
-    """A route to /states_list"""
-    data = sorted(storage.all(State).values(), key=lambda state: state.name)
-    return render_template("7-states_list.html", states=data)
-
-
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0")
