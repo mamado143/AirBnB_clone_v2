@@ -817,7 +817,5 @@ amenity_id: b80aec52-d0c9-420a-8471-3254572954b6
 guillaume@ubuntu:~/AirBnB_v2$ 
 Repo:
 
-GitHub repository: AirBnB_clone_v2
-File: models/amenity.py, models/place.py
-  
-Copyright © 2024 ALX, All rights reserved.
+Authors:
+Mohamed Dahir Mohamoud.
